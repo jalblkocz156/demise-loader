@@ -20,3 +20,7 @@ globals:
     any: true
   game:
     any: true
+  gethui:
+    any: true
+  load:
+    any: true

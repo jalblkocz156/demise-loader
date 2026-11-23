@@ -1,2 +1,6 @@
 std = "roblox+demise"
 exclude = ["dist/**"]
+
+[rules]
+incorrect_standard_library_use = "allow"
+roblox_manual_fromscale_or_fromoffset = "allow"
