@@ -1,0 +1,12 @@
+dist/
+build/
+*.rbxl
+*.rbxlx
+*.rbxm
+*.rbxmx
+*.log
+*.luac
+.vscode/
+.idea/
+.DS_Store
+config.lua
