@@ -22,7 +22,6 @@ jobs:
       - name: Style check
         run: npx --yes @johnnymorganz/stylua-bin@latest --check src
       - name: selene
-        continue-on-error: true
         run: |
           url=$(curl -sSL https://api.github.com/repos/Kampfkarren/selene/releases/latest | grep -o 'https://[^"]*linux[^"]*\.zip' | head -1)
           curl -sSL -o selene.zip "$url"

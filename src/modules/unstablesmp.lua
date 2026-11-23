@@ -556,7 +556,7 @@ local TargetHUD = (function()
 			local currentMaxHealth = math.max(1, math.floor(maxHealth))
 			local pct = math.clamp(health / maxHealth, 0, 1)
 
-			HealthLabel.Text = string.format("%d HP", currentHealth)
+			HealthLabel.Text = string.format("%d/%d HP", currentHealth, currentMaxHealth)
 			HealthBar.Size = UDim2.new(pct, 0, 1, 0)
 
 			if pct > 0.5 then
@@ -699,16 +699,10 @@ local Combat = (function()
 						or player.Character:FindFirstChild("Humanoid")
 
 					-- Check health from either Humanoid or Player object
-					local health, maxHealth = GetHealth(player, targetHum)
+					local health = GetHealth(player, targetHum)
 
 					-- If no humanoid found, check if character has a primary part (custom models)
-					local isValid = false
-					if health and health > 0 then
-						isValid = true
-					elseif targetRoot then
-						-- Custom model without humanoid or health - check if it's a valid character
-						isValid = true
-					end
+					local isValid = (health and health > 0) or targetRoot ~= nil
 
 					if targetRoot and isValid then
 						local distance = (root.Position - targetRoot.Position).Magnitude
@@ -1501,7 +1495,7 @@ local Visuals = (function()
 			end
 			NotificationSystem.Notify("Visuals", "Player Chams: ENABLED", 2)
 		else
-			for player, hl in pairs(self.Chams.Highlights) do
+			for _, hl in pairs(self.Chams.Highlights) do
 				if hl then
 					pcall(function()
 						hl:Destroy()
@@ -1538,7 +1532,7 @@ local Visuals = (function()
 
 			NotificationSystem.Notify("Visuals", "Name & Health ESP: ENABLED", 2)
 		else
-			for player, bb in pairs(self.NameESP.Billboards) do
+			for _, bb in pairs(self.NameESP.Billboards) do
 				if bb then
 					pcall(function()
 						bb:Destroy()

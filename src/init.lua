@@ -337,7 +337,7 @@ local here = REGISTRY and (REGISTRY[game.PlaceId] or REGISTRY[game.GameId])
 local selected
 local rows = {}
 
-local function select(mod: string?)
+local function selectModule(mod: string?)
 	selected = mod
 	for m, row in rows do
 		row.BackgroundColor3 = (m == mod) and ROW_ON or ROW
@@ -360,7 +360,6 @@ local function run(mod: string?)
 			status.TextColor3 = GOOD
 		else
 			status.Text = tostring(err)
-			warn(err)
 			warn(err)
 			status.TextColor3 = BAD
 		end
@@ -410,12 +409,13 @@ for i, entry in sorted do
 		TextXAlignment = Enum.TextXAlignment.Right,
 	})
 	row.MouseButton1Click:Connect(function()
-		select(entry.module)
+		selectModule(entry.module)
 	end)
 	rows[entry.module] = row
 end
 
 exec.MouseButton1Click:Connect(function()
+	if not selected then return end
 	run(selected)
 end)
 
@@ -425,7 +425,7 @@ if not REGISTRY then
 elseif here then
 	status.Text = ("Detected %s"):format(here.name)
 	status.TextColor3 = GOOD
-	select(here.module)
+	selectModule(here.module)
 else
 	status.Text = ("No build for place %d"):format(game.PlaceId)
 	status.TextColor3 = MUTED
@@ -434,7 +434,7 @@ end
 toggleRow.MouseButton1Click:Connect(function()
 	paintToggle(not auto)
 	if auto and here then
-		select(here.module)
+		selectModule(here.module)
 		run(here.module)
 	end
 end)
