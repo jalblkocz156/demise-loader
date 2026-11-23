@@ -3,7 +3,8 @@ local VERSION = "1.3.2"
 local ORG = "jalblkocz156"
 local REPO = "demise-loader"
 
-local BASE = getgenv().DemiseBase or ("https://github.com/%s/%s/releases/download/v%s/"):format(ORG, REPO, VERSION)
+local BASE = getgenv().DemiseBase
+	or ("https://github.com/%s/%s/releases/download/v%s/"):format(ORG, REPO, VERSION)
 
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
@@ -54,8 +55,12 @@ local function loadRegistry()
 	end
 	local clean = {}
 	for id, entry in result do
-		if type(id) == "number" and type(entry) == "table"
-			and type(entry.name) == "string" and type(entry.module) == "string" then
+		if
+			type(id) == "number"
+			and type(entry) == "table"
+			and type(entry.name) == "string"
+			and type(entry.module) == "string"
+		then
 			clean[id] = { name = entry.name, module = entry.module }
 		end
 	end
@@ -76,7 +81,9 @@ function Loader:Load(name: string)
 		cache[name] = chunk
 	end
 	local fn, cerr = loadstring(chunk, "=demise:" .. name)
-	if not fn then error(("%s failed to compile: %s"):format(name, tostring(cerr)), 2) end
+	if not fn then
+		error(("%s failed to compile: %s"):format(name, tostring(cerr)), 2)
+	end
 	return fn()
 end
 
@@ -191,7 +198,10 @@ end)
 
 local drag, dragFrom, origin
 head.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+	if
+		input.UserInputType == Enum.UserInputType.MouseButton1
+		or input.UserInputType == Enum.UserInputType.Touch
+	then
 		drag = true
 		dragFrom = input.Position
 		origin = win.Position
@@ -203,9 +213,16 @@ head.InputBegan:Connect(function(input)
 	end
 end)
 UserInputService.InputChanged:Connect(function(input)
-	if drag and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+	if
+		drag
+		and (
+			input.UserInputType == Enum.UserInputType.MouseMovement
+			or input.UserInputType == Enum.UserInputType.Touch
+		)
+	then
 		local d = input.Position - dragFrom
-		win.Position = UDim2.new(origin.X.Scale, origin.X.Offset + d.X, origin.Y.Scale, origin.Y.Offset + d.Y)
+		win.Position =
+			UDim2.new(origin.X.Scale, origin.X.Offset + d.X, origin.Y.Scale, origin.Y.Offset + d.Y)
 	end
 end)
 
@@ -219,7 +236,8 @@ local status = new("TextLabel", {
 	TextSize = 12,
 	TextColor3 = MUTED,
 	TextXAlignment = Enum.TextXAlignment.Left,
-	TextWrapped = true, TextYAlignment = Enum.TextYAlignment.Top,
+	TextWrapped = true,
+	TextYAlignment = Enum.TextYAlignment.Top,
 })
 
 local auto = true
@@ -265,7 +283,9 @@ corner(7, knob)
 local function paintToggle(on: boolean)
 	auto = on
 	track.BackgroundColor3 = on and ACCENT or Color3.fromRGB(60, 60, 70)
-	TweenService:Create(knob, TweenInfo.new(0.14), { Position = UDim2.fromOffset(on and 16 or 2, 2) }):Play()
+	TweenService
+		:Create(knob, TweenInfo.new(0.14), { Position = UDim2.fromOffset(on and 16 or 2, 2) })
+		:Play()
 end
 
 new("TextLabel", {
