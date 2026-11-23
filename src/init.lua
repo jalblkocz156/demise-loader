@@ -1,5 +1,5 @@
 --!nonstrict
-local VERSION = "1.3.0"
+local VERSION = "1.3.1"
 local ORG = "jalblkocz156"
 local REPO = "demise-loader"
 
@@ -10,6 +10,7 @@ local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local LocalPlayer = Players.LocalPlayer
 local loadstring = loadstring or load
+assert(loadstring, "no loadstring")
 
 local BG = Color3.fromRGB(17, 17, 21)
 local SURFACE = Color3.fromRGB(27, 27, 33)
@@ -23,7 +24,7 @@ local BAD = Color3.fromRGB(230, 100, 100)
 
 local function fetch(path: string): string
 	local ok, body = pcall(function()
-		return game:HttpGetAsync(BASE .. path)
+		return game:HttpGet(BASE .. path)
 	end)
 	if not ok or type(body) ~= "string" or #body < 16 then
 		error(("[Demise] could not fetch %s"):format(path), 2)
@@ -31,17 +32,20 @@ local function fetch(path: string): string
 	return body
 end
 
+local REGISTRY_ERR = "none"
 -- Registry lives in the release as registry.lua so adding a game is a data edit,
 -- not a loader bump. A failure here degrades to an empty list, never a hard error.
 local function loadRegistry()
 	local ok, body = pcall(function()
-		return game:HttpGetAsync(BASE .. "registry.lua")
+		return game:HttpGet(BASE .. "registry.lua")
 	end)
 	if not ok or type(body) ~= "string" or #body < 8 then
+		REGISTRY_ERR = "fetch"
 		return nil
 	end
-	local fn = loadstring(body, "=demise:registry")
+	local fn, cerr = loadstring(body, "=demise:registry")
 	if not fn then
+		REGISTRY_ERR = tostring(cerr)
 		return nil
 	end
 	local ran, result = pcall(fn)
@@ -71,7 +75,8 @@ function Loader:Load(name: string)
 		chunk = fetch(name .. ".lua")
 		cache[name] = chunk
 	end
-	local fn = assert(loadstring(chunk, "=demise:" .. name))
+	local fn, cerr = loadstring(chunk, "=demise:" .. name)
+	if not fn then error(("%s failed to compile: %s"):format(name, tostring(cerr)), 2) end
 	return fn()
 end
 
@@ -393,7 +398,7 @@ exec.MouseButton1Click:Connect(function()
 end)
 
 if not REGISTRY then
-	status.Text = "Registry unavailable"
+	status.Text = "Registry unavailable: " .. REGISTRY_ERR
 	status.TextColor3 = BAD
 elseif here then
 	status.Text = ("Detected %s"):format(here.name)

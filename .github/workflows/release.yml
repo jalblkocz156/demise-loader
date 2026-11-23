@@ -23,11 +23,18 @@ jobs:
             [ -f "src/modules/$m.lua" ] || { echo "::error::registry references missing src/modules/$m.lua"; exit 1; }
           done
 
+      - name: Install darklua
+        run: |
+          curl -sSL -o darklua.zip https://github.com/seaofvoices/darklua/releases/download/v0.19.0/darklua-linux-x86_64.zip
+          unzip -o -q darklua.zip
+          chmod +x darklua
+          ./darklua --version
+
       - name: Bundle
         run: |
           mkdir -p dist/modules
           minify() {
-            if npx --yes darklua@latest process "$1" "$2" --config .darklua.json >/dev/null 2>&1 && [ -s "$2" ]; then
+            if ./darklua process "$1" "$2" --config .darklua.json >/dev/null && [ -s "$2" ]; then
               echo "minified $1"
             else
               echo "::warning::darklua failed on $1, copying verbatim"
@@ -46,6 +53,8 @@ jobs:
             [ -s "$f" ] || { echo "::error::$f is empty"; exit 1; }
           done
           echo "loader bytes: $(wc -c < dist/loader.lua) / source bytes: $(wc -c < src/init.lua)"
+          SRC=$(wc -c < src/init.lua); OUT=$(wc -c < dist/loader.lua)
+          [ "$OUT" -lt $((SRC * 85 / 100)) ] || { echo "::error::loader not minified ($OUT vs $SRC)"; exit 1; }
 
       - name: Publish
         uses: softprops/action-gh-release@v2

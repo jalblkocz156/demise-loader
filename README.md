@@ -4,7 +4,7 @@ Roblox script loader. Versioned releases, obfuscated distribution.
 
 ## Install
 
-    loadstring(game:HttpGet("https://github.com/jalblkocz156/demise-loader/releases/download/v1.3.0/loader.lua"))()
+    loadstring(game:HttpGet("https://github.com/jalblkocz156/demise-loader/releases/download/v1.3.1/loader.lua"))()
 
 ## Adding a game
 
