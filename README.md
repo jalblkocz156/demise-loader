@@ -5,28 +5,10 @@ Private Roblox script loader. Versioned releases, obfuscated distribution, priva
 ## Install
 
 ```lua
-loadstring(game:HttpGet("https://cdn.jsdelivr.net/gh/jalblkoc2156/demise-loader@v1.0.0/dist/loader.lua"))()
-
-cat > README.md << 'EOF'
-# Demise Loader
-
-Private Roblox script loader. Versioned releases, obfuscated distribution, private source.
-
-## Install
-
-```lua
-loadstring(game:HttpGet("https://cdn.jsdelivr.net/gh/jalblkoc2156/demise-loader@v1.0.0/dist/loader.lua"))()
-cat > README.md << 'EOF'
-# Demise Loader
-
-Private Roblox script loader. Versioned releases, obfuscated distribution, private source.
-
-## Install
-
-```lua
-loadstring(game:HttpGet("https://cdn.jsdelivr.net/gh/jalblkoc2156/demise-loader@v1.0.0/dist/loader.lua"))()
-**16 — .github/workflows/release.yml**
+loadstring(game:HttpGet("https://cdn.jsdelivr.net/gh/jalblkocz156/demise-loader@v1.0.0/dist/loader.lua"))()
+**4 — create the missing workflow**
 ```bash
+mkdir -p .github/workflows
 cat > .github/workflows/release.yml << 'EOF'
 name: release
 on:
