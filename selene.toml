@@ -1,2 +1,2 @@
-std = "roblox"
+std = "roblox+demise"
 exclude = ["dist/**"]

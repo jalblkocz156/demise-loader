@@ -1,0 +1,22 @@
+---
+globals:
+  getgenv:
+    any: true
+  getrawmetatable:
+    any: true
+  hookfunction:
+    any: true
+  loadstring:
+    any: true
+  identifyexecutor:
+    any: true
+  cloneref:
+    any: true
+  Drawing:
+    any: true
+  Workspace:
+    any: true
+  UserInputService:
+    any: true
+  game:
+    any: true
