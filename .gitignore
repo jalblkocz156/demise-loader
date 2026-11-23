@@ -1,12 +1,4 @@
 dist/
-build/
-*.rbxl
-*.rbxlx
-*.rbxm
-*.rbxmx
+darklua
+darklua.zip
 *.log
-*.luac
-.vscode/
-.idea/
-.DS_Store
-config.lua

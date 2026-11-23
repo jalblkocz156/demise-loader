@@ -1,0 +1,27 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          curl -sSL -o dl.zip https://github.com/seaofvoices/darklua/releases/download/v0.19.0/darklua-linux-x86_64.zip
+          unzip -o -q dl.zip && chmod +x darklua
+      - run: |
+          for f in src/init.lua src/registry.lua src/modules/*.lua; do
+            ./darklua process "$f" /tmp/o.lua --config .darklua-parse.json >/dev/null \
+              || { echo "::error::$f does not parse"; exit 1; }
+          done
+      - uses: JohnnyMorganz/stylua-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: latest
+          args: --check src
+      - uses: Kampfkarren/selene@latest
+        with:
+          args: src

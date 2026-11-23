@@ -38,7 +38,6 @@ jobs:
 
       - name: Bundle
         run: |
-          mkdir -p dist/modules
           minify() {
             if ./darklua process "$1" "$2" --config .darklua.json >/dev/null && [ -s "$2" ]; then
               echo "minified $1"
@@ -50,12 +49,12 @@ jobs:
           minify src/init.lua dist/loader.lua
           minify src/registry.lua dist/registry.lua
           for f in src/modules/*.lua; do
-            minify "$f" "dist/modules/$(basename "$f")"
+            minify "$f" "dist/$(basename "$f")"
           done
 
       - name: Sanity check build
         run: |
-          for f in dist/loader.lua dist/registry.lua dist/modules/*.lua; do
+          for f in dist/*.lua; do
             [ -s "$f" ] || { echo "::error::$f is empty"; exit 1; }
           done
           echo "loader bytes: $(wc -c < dist/loader.lua) / source bytes: $(wc -c < src/init.lua)"
@@ -68,4 +67,4 @@ jobs:
           files: |
             dist/loader.lua
             dist/registry.lua
-            dist/modules/*.lua
+            dist/*.lua

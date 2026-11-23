@@ -3,7 +3,7 @@ local VERSION = "1.3.2"
 local ORG = "jalblkocz156"
 local REPO = "demise-loader"
 
-local BASE = ("https://github.com/%s/%s/releases/download/v%s/"):format(ORG, REPO, VERSION)
+local BASE = getgenv().DemiseBase or ("https://github.com/%s/%s/releases/download/v%s/"):format(ORG, REPO, VERSION)
 
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
