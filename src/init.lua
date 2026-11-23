@@ -1,5 +1,5 @@
 --!nonstrict
-local VERSION = "1.3.1"
+local VERSION = "1.3.2"
 local ORG = "jalblkocz156"
 local REPO = "demise-loader"
 
@@ -219,7 +219,7 @@ local status = new("TextLabel", {
 	TextSize = 12,
 	TextColor3 = MUTED,
 	TextXAlignment = Enum.TextXAlignment.Left,
-	TextTruncate = Enum.TextTruncate.AtEnd,
+	TextWrapped = true, TextYAlignment = Enum.TextYAlignment.Top,
 })
 
 local auto = true
@@ -340,6 +340,8 @@ local function run(mod: string?)
 			status.TextColor3 = GOOD
 		else
 			status.Text = tostring(err)
+			warn(err)
+			warn(err)
 			status.TextColor3 = BAD
 		end
 	end)

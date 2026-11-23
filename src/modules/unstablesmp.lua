@@ -86,8 +86,6 @@ local Themes = {
 }
 local ActiveThemeName = "Demise Purple"
 local AccentColor = Themes[ActiveThemeName]
-echo
-cat >> src/modules/unstablesmp.lua << 'LUAEOF'
 
 -- ============================================================================
 -- 1. NOTIFICATION SYSTEM
@@ -193,8 +191,6 @@ local NotificationSystem = (function()
     System.Init()
     return System
 end)()
-echo
-cat >> src/modules/unstablesmp.lua << 'LUAEOF'
 
 -- ============================================================================
 -- 2. LOADING SCREEN UI MODULE
@@ -368,8 +364,6 @@ local LoaderUI = (function()
 
     return Module
 end)()
-echo
-cat >> src/modules/unstablesmp.lua << 'LUAEOF'
 
 -- ============================================================================
 -- 3. TARGET HUD MODULE
@@ -560,8 +554,6 @@ local TargetHUD = (function()
     HUD.Create()
     return HUD
 end)()
-echo
-cat >> src/modules/unstablesmp.lua << 'LUAEOF'
 
 -- ============================================================================
 -- 4. COMBAT MODULE
@@ -968,8 +960,6 @@ local Combat = (function()
 
     return Module
 end)()
-echo
-cat >> src/modules/unstablesmp.lua << 'LUAEOF'
 
 -- ============================================================================
 -- 5. MOVEMENT MODULE
@@ -1245,8 +1235,6 @@ local Movement = (function()
 
     return Module
 end)()
-echo
-cat >> src/modules/unstablesmp.lua << 'LUAEOF'
 
 -- ============================================================================
 -- 6. VISUALS MODULE
@@ -1639,8 +1627,6 @@ local Visuals = (function()
 
     return Module
 end)()
-echo
-cat >> src/modules/unstablesmp.lua << 'LUAEOF'
 
 -- ============================================================================
 -- 7. MISC MODULE
@@ -1752,8 +1738,6 @@ local Misc = (function()
 
     return Module
 end)()
-echo
-cat >> src/modules/unstablesmp.lua << 'LUAEOF'
 
 -- ============================================================================
 -- 8. CLICK GUI MODULE (Rise & Vape Modes with Dynamic Theming)
@@ -2062,8 +2046,6 @@ local ClickGUI = (function()
             end
         end)
     end
-echo
-cat >> src/modules/unstablesmp.lua << 'LUAEOF'
 
     -- ========================================================================
     -- VAPE MODE (Card Grid Layout)
@@ -2232,8 +2214,6 @@ cat >> src/modules/unstablesmp.lua << 'LUAEOF'
             end
         end)
     end
-echo
-cat >> src/modules/unstablesmp.lua << 'LUAEOF'
 
     -- ========================================================================
     -- TAB CONTENT POPULATOR
@@ -2712,8 +2692,6 @@ cat >> src/modules/unstablesmp.lua << 'LUAEOF'
             modeSwitchBtn.Parent = contentFrame
         end
     end
-echo
-cat >> src/modules/unstablesmp.lua << 'LUAEOF'
 
     -- ========================================================================
     -- UI ELEMENT BUILDERS (Toggle, Slider, Keybind, Button)
@@ -2970,8 +2948,6 @@ cat >> src/modules/unstablesmp.lua << 'LUAEOF'
 
     return GUI
 end)()
-echo
-cat >> src/modules/unstablesmp.lua << 'LUAEOF'
 
 -- ============================================================================
 -- 9. HOTKEYS & GLOBAL CONTROLS

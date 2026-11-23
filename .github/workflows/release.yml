@@ -30,6 +30,12 @@ jobs:
           chmod +x darklua
           ./darklua --version
 
+      - name: Parse check
+        run: |
+          for f in src/init.lua src/registry.lua src/modules/*.lua; do
+            ./darklua process "$f" /tmp/parse.out --config .darklua-parse.json >/dev/null || { echo "::error::$f does not parse"; exit 1; }
+          done
+
       - name: Bundle
         run: |
           mkdir -p dist/modules
