@@ -12,17 +12,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Bundle
         run: |
-          mkdir -p dist
-          cat src/init.lua > dist/loader.lua
+          mkdir -p dist/modules
+          cp src/init.lua dist/loader.lua
           for f in src/modules/*.lua; do
-            echo "-- module: $(basename "$f")" >> dist/loader.lua
-            cat "$f" >> dist/loader.lua
+            cp "$f" dist/modules/
           done
-      - name: Minify
-        run: |
-          npx --yes luamin -f dist/loader.lua > dist/loader.min.lua
-          mv dist/loader.min.lua dist/loader.lua
       - name: Publish
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/loader.lua
+          files: |
+            dist/loader.lua
+            dist/modules/*.lua

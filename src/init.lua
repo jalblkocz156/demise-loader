@@ -3,10 +3,10 @@ local VERSION = "1.0.0"
 local ORG = "jalblkocz156"
 local REPO = "demise-loader"
 
-local CDN = ("https://cdn.jsdelivr.net/gh/%s/%s@v%s/dist/"):format(ORG, REPO, VERSION)
+local BASE = ("https://github.com/%s/%s/releases/download/v%s/"):format(ORG, REPO, VERSION)
 
 local function fetch(path: string): string
-    local url = CDN .. path
+    local url = BASE .. path
     local ok, body = pcall(function()
         return game:HttpGetAsync(url)
     end)
