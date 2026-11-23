@@ -415,7 +415,9 @@ for i, entry in sorted do
 end
 
 exec.MouseButton1Click:Connect(function()
-	if not selected then return end
+	if not selected then
+		return
+	end
 	run(selected)
 end)
 
