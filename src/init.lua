@@ -2,6 +2,7 @@
 local VERSION = "1.3.3"
 local ORG = "jalblkocz156"
 local REPO = "demise-loader"
+local unused = 1
 
 local BASE = getgenv().DemiseBase
 	or ("https://github.com/%s/%s/releases/download/v%s/"):format(ORG, REPO, VERSION)

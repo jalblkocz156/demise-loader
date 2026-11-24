@@ -3,6 +3,8 @@
   "[luau]": { "editor.defaultFormatter": "JohnnyMorganz.stylua" },
   "editor.formatOnSave": true,
   "files.eol": "\n",
+  "stylua.styluaPath": "C:/Users/vitan/.rokit/bin/stylua.exe",
+  "selene.pathToSelene": "C:/Users/vitan/.rokit/bin/selene.exe",
   "luau-lsp.completion.imports.enabled": false,
   "luau-lsp.types.roblox": true,
   "luau-lsp.sourcemap.enabled": false
