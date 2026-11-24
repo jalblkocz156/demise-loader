@@ -1,5 +1,5 @@
 --!nonstrict
-local VERSION = "1.3.2"
+local VERSION = "1.3.3"
 local ORG = "jalblkocz156"
 local REPO = "demise-loader"
 

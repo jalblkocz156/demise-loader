@@ -10,5 +10,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: CompeyDev/setup-rokit@v0.1.1
-      - run: rokit install --force
+      - run: rokit install --no-trust-check
       - run: bash tools/check.sh
